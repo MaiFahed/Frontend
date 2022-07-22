@@ -22,6 +22,16 @@ router.use('/books/search/:topic', (req, res)=>{
            return res.staus(200).send(body)
         })
 })
+router.patch('/books/:id', (req, res)=>{
+    const id = req.params.id
+    const url = 'http://10.211.55.3/books/'+id
+    request({url, json:true, method: 'PATCH', body: req.body}, (error,  {body})=>{
+            if(error){
+               return res.status(404).send(error)
+           }
+           return res.status(200).send(body)
+        })
+})
 router.use('/books/purchase/:id', (req, res)=>{
     const id = req.params.id
     const url = 'http://localhost:3002/books/purchase/'+id
